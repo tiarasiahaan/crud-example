@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +22,16 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::resource('employee', EmployeeController::class)->middleware(['auth', 'verified']);
+
+// Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+//     Route::name('dashboard.')->prefix('dashboard')->group(function () {
+//         Route::get('/', [DashboardController::class, 'index'])->name('index');
+//         Route::resource('employee', EmployeeController::class);
+//     });
+// });
+
 
 require __DIR__.'/auth.php';
